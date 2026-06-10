@@ -1,0 +1,271 @@
+<!-- ================================================================
+     PORTAL DE LINKS - ARCHIVO GENÉRICO
+     ================================================================
+     SUBE ESTE ARCHIVO en GitHub como: links/index.html
+     URL resultante: tu-repositorio.vercel.app/links
+     
+     PLACEHOLDERS A CAMBIAR:
+     - WA_NUMBER           → Tu número de WhatsApp (52 + 10 dígitos)
+     - TU_LOGO.png         → Nombre de tu archivo de logo
+     - [TU APELLIDO]       → Tu apellido
+     - [Tu Especialidad]   → Tu especialidad
+     - [Tu Ciudad]         → Tu ciudad
+     - URL_PPR             → URL completa de tu simulador PPR
+     - URL_SEGURO          → URL completa de tu cotizador de seguro
+     - tu-usuario-ig       → Tu usuario de Instagram (sin @)
+     ================================================================ -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asesor [TU APELLIDO] — Herramientas Financieras</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0F153F;
+      --surface:#1a2258;
+      --surface2:#1e2a6a;
+      --gold:#c9a84c;
+      --gold-dim:rgba(201,168,76,0.12);
+      --green:#2DAA26;
+      --text:#f1f5f9;
+      --text-muted:#94a3b8;
+      --text-dim:#64748b;
+      --border:rgba(255,255,255,0.09);
+      --radius:20px;
+      --radius-sm:12px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{
+      font-family:'Outfit',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      padding:40px 20px 60px;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    /* PROFILE */
+    .profile{text-align:center;margin-bottom:36px;}
+    .logo-wrap{
+      width:88px;height:88px;
+      background:var(--surface);
+      border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      margin:0 auto 16px;
+      border:2px solid rgba(201,168,76,0.3);
+      overflow:hidden;
+    }
+    .logo-wrap img{
+      width:72px;height:72px;
+      object-fit:contain;
+      mix-blend-mode:screen;
+    }
+    .profile-name{font-size:22px;font-weight:800;letter-spacing:-0.3px;margin-bottom:4px;}
+    .profile-name span{color:var(--gold);}
+    .profile-sub{font-size:13px;color:var(--text-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
+    .profile-desc{font-size:14px;color:var(--text-muted);max-width:340px;margin:0 auto;line-height:1.6;}
+
+    /* DIVIDER */
+    .divider{
+      width:48px;height:2px;
+      background:linear-gradient(90deg,transparent,var(--gold),transparent);
+      margin:24px auto;
+    }
+
+    /* SECTION LABEL */
+    .section-label{
+      font-size:10px;font-weight:600;color:var(--text-dim);
+      letter-spacing:2px;text-transform:uppercase;
+      text-align:center;margin-bottom:14px;
+    }
+
+    /* TOOL CARDS */
+    .cards{width:100%;max-width:420px;display:flex;flex-direction:column;gap:14px;margin-bottom:32px;}
+
+    .card{
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:22px 20px;
+      text-decoration:none;
+      display:block;
+      transition:all 0.25s;
+      position:relative;
+      overflow:hidden;
+    }
+    .card::before{
+      content:'';
+      position:absolute;top:0;left:0;right:0;height:3px;
+    }
+    .card.ppr::before{background:linear-gradient(90deg,var(--gold),#e0c06d);}
+    .card.seguro::before{background:linear-gradient(90deg,#3b82f6,#60a5fa);}
+    .card:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,0.3);}
+    .card:active{transform:translateY(0);}
+
+    .card-top{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+    .card-icon{font-size:26px;flex-shrink:0;}
+    .card-title{font-size:17px;font-weight:700;}
+    .card.ppr .card-title{color:var(--gold);}
+    .card.seguro .card-title{color:#60a5fa;}
+    .card-badge{
+      margin-left:auto;font-size:10px;font-weight:600;
+      padding:3px 9px;border-radius:20px;white-space:nowrap;
+    }
+    .card.ppr .card-badge{background:var(--gold-dim);color:var(--gold);border:1px solid rgba(201,168,76,0.25);}
+    .card.seguro .card-badge{background:rgba(59,130,246,0.12);color:#60a5fa;border:1px solid rgba(59,130,246,0.25);}
+
+    .card-desc{font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:14px;}
+
+    .card-features{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px;}
+    .feat{
+      font-size:11px;font-weight:500;
+      background:rgba(255,255,255,0.06);
+      border:1px solid var(--border);
+      padding:4px 10px;border-radius:20px;
+      color:var(--text-muted);
+    }
+
+    .card-cta{
+      display:flex;align-items:center;justify-content:space-between;
+      font-size:13px;font-weight:600;
+    }
+    .card.ppr .card-cta{color:var(--gold);}
+    .card.seguro .card-cta{color:#60a5fa;}
+    .card-arrow{font-size:18px;}
+
+    /* SOCIAL LINKS */
+    .socials{width:100%;max-width:420px;display:flex;flex-direction:column;gap:10px;margin-bottom:32px;}
+
+    .social-btn{
+      display:flex;align-items:center;gap:14px;
+      padding:14px 18px;
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius-sm);
+      text-decoration:none;
+      color:var(--text-muted);
+      font-size:14px;font-weight:500;
+      transition:all 0.2s;
+    }
+    .social-btn:hover{background:var(--surface2);color:var(--text);}
+    .social-icon{font-size:20px;flex-shrink:0;}
+    .social-label{flex:1;}
+    .social-handle{font-size:12px;color:var(--text-dim);margin-top:1px;}
+    .social-arrow{font-size:14px;color:var(--text-dim);}
+
+    /* FOOTER */
+    .footer{text-align:center;font-size:11px;color:var(--text-dim);margin-top:8px;}
+    .footer a{color:var(--text-dim);text-decoration:underline;}
+  </style>
+</head>
+<body>
+
+  <!-- PROFILE -->
+  <div class="profile">
+    <div class="logo-wrap">
+      <img src="/TU_LOGO.png" alt="Logo"> <!-- ← CAMBIA el nombre del logo -->
+    </div>
+    <div class="profile-name">Asesor <span>[TU APELLIDO]</span></div> <!-- ← CAMBIA -->
+    <div class="profile-sub">[Tu Especialidad]</div> <!-- ← CAMBIA -->
+    <div class="profile-desc">
+      Agente de seguros y asesor financiero. Especialista en protección patrimonial y planeación del retiro.
+      <!-- ← Puedes modificar esta descripción -->
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- HERRAMIENTAS -->
+  <div class="section-label">🛠️ Mis herramientas gratuitas</div>
+
+  <div class="cards">
+
+    <!-- SIMULADOR PPR -->
+    <a class="card ppr" href="URL_PPR"> <!-- ← CAMBIA por tu URL completa del simulador PPR -->
+      <div class="card-top">
+        <span class="card-icon">📈</span>
+        <span class="card-title">Simulador de Retiro</span>
+        <span class="card-badge">OptiMaxx Plus</span>
+      </div>
+      <p class="card-desc">
+        Visualiza cuánto tendrías acumulado al llegar a los 65 años según tu aportación mensual. Plan de inversión con rendimientos reales y bono de fidelidad Allianz.
+      </p>
+      <div class="card-features">
+        <span class="feat">📊 7 portafolios</span>
+        <span class="feat">🎁 Bono de fidelidad</span>
+        <span class="feat">💰 Pensión estimada</span>
+      </div>
+      <div class="card-cta">
+        <span>Calcular mi proyección</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <!-- COTIZADOR SEGURO -->
+    <a class="card seguro" href="URL_SEGURO"> <!-- ← CAMBIA por tu URL completa del cotizador -->
+      <div class="card-top">
+        <span class="card-icon">🛡️</span>
+        <span class="card-title">Cotizador de Seguro de Vida</span>
+        <span class="card-badge">OptiMaxx Protección</span>
+      </div>
+      <p class="card-desc">
+        Descubre en segundos cuánto cuesta proteger a tu familia. Con devolución del 100% de tus primas si llegas al final del plazo sin usar el seguro.
+      </p>
+      <div class="card-features">
+        <span class="feat">🔄 Recuperas tu dinero</span>
+        <span class="feat">💳 Hasta 12 MSI</span>
+        <span class="feat">🏥 3 paquetes</span>
+      </div>
+      <div class="card-cta">
+        <span>Ver mi cotización</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- REDES SOCIALES -->
+  <div class="section-label">📱 Encuéntrame en</div>
+
+  <div class="socials">
+
+    <!-- WHATSAPP -->
+    <a class="social-btn" href="https://wa.me/52XXXXXXXXXX?text=Hola, me gustaría recibir información sobre tus servicios financieros." target="_blank">
+      <!-- ← CAMBIA 52XXXXXXXXXX por tu número -->
+      <span class="social-icon">💬</span>
+      <div class="social-label">
+        <div>WhatsApp</div>
+        <div class="social-handle">Escríbeme directo</div>
+      </div>
+      <span class="social-arrow">↗</span>
+    </a>
+
+    <!-- INSTAGRAM -->
+    <a class="social-btn" href="https://instagram.com/tu-usuario-ig" target="_blank">
+      <!-- ← CAMBIA tu-usuario-ig por tu usuario de Instagram -->
+      <span class="social-icon">📸</span>
+      <div class="social-label">
+        <div>Instagram</div>
+        <div class="social-handle">@tu-usuario-ig</div> <!-- ← CAMBIA -->
+      </div>
+      <span class="social-arrow">↗</span>
+    </a>
+
+  </div>
+
+  <div class="footer">
+    <div>© 2025 Asesor [TU APELLIDO] · [Tu Ciudad], México</div> <!-- ← CAMBIA -->
+    <div style="margin-top:4px">
+      Agente independiente de seguros y asesor financiero
+    </div>
+  </div>
+
+</body>
+</html>
