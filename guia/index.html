@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guía Completa — Herramientas Digitales PPR · Asesor Landero</title>
+  <style>
+    :root {
+      --azul: #1a56db;
+      --azul-oscuro: #1e3a8a;
+      --verde: #057a55;
+      --amarillo-bg: #fffbeb;
+      --amarillo-border: #f59e0b;
+      --verde-bg: #f0fdf4;
+      --verde-border: #22c55e;
+      --naranja-bg: #fff7ed;
+      --naranja-border: #f97316;
+      --rojo-bg: #fef2f2;
+      --rojo-border: #ef4444;
+      --gris-bg: #f8fafc;
+      --gris-borde: #e2e8f0;
+      --texto: #1e293b;
+      --texto-suave: #64748b;
+      --codigo-bg: #0f172a;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: var(--texto); background: #f1f5f9; line-height: 1.7; }
+    header { background: linear-gradient(135deg, var(--azul-oscuro), var(--azul)); color: white; padding: 3rem 2rem 2.5rem; text-align: center; }
+    header .badge { display: inline-block; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.35); border-radius: 99px; padding: 4px 14px; font-size: 0.78rem; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 1rem; }
+    header h1 { font-size: 2.2rem; font-weight: 800; line-height: 1.2; }
+    header p  { margin-top: .6rem; opacity: .85; font-size: 1.05rem; }
+    nav.toc { background: white; border-bottom: 1px solid var(--gris-borde); padding: .75rem 2rem; position: sticky; top: 0; z-index: 100; overflow-x: auto; white-space: nowrap; }
+    nav.toc a { color: var(--azul); text-decoration: none; font-size: .82rem; font-weight: 600; margin-right: 1.2rem; }
+    .container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+    section { background: white; border-radius: 12px; padding: 2rem 2.2rem; margin-bottom: 2rem; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+    .seccion-num { display: inline-flex; align-items: center; gap: .5rem; background: var(--azul); color: white; font-weight: 700; font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; padding: 4px 12px; border-radius: 99px; margin-bottom: .9rem; }
+    h2 { font-size: 1.5rem; font-weight: 800; color: var(--azul-oscuro); margin-bottom: 1rem; }
+    h3 { font-size: 1.1rem; font-weight: 700; color: var(--texto); margin: 1.4rem 0 .6rem; border-left: 3px solid var(--azul); padding-left: .7rem; }
+    p  { margin-bottom: .9rem; }
+    ol.pasos { padding-left: 0; list-style: none; counter-reset: paso; }
+    ol.pasos li { counter-increment: paso; display: flex; gap: .9rem; margin-bottom: .8rem; align-items: flex-start; }
+    ol.pasos li::before { content: counter(paso); flex-shrink: 0; width: 26px; height: 26px; background: var(--azul); color: white; border-radius: 50%; font-size: .78rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+    ul.lista { padding-left: 1.4rem; margin-bottom: .8rem; }
+    ul.lista li { margin-bottom: .4rem; }
+    .callout { border-radius: 8px; padding: .9rem 1.1rem; margin: 1rem 0; display: flex; gap: .75rem; align-items: flex-start; font-size: .94rem; }
+    .callout.tip  { background: var(--amarillo-bg); border-left: 4px solid var(--amarillo-border); }
+    .callout.ok   { background: var(--verde-bg);    border-left: 4px solid var(--verde-border); }
+    .callout.warn { background: var(--naranja-bg);  border-left: 4px solid var(--naranja-border); }
+    .callout.fix  { background: var(--rojo-bg);     border-left: 4px solid var(--rojo-border); }
+    pre { background: var(--codigo-bg); color: #e2e8f0; border-radius: 8px; padding: 1.2rem 1.4rem; overflow-x: auto; font-size: .85rem; line-height: 1.6; margin: .8rem 0; }
+    code.inline { background: #e2e8f0; color: #0f172a; padding: 1px 6px; border-radius: 4px; font-size: .88em; }
+    .tree { background: #0f172a; color: #94a3b8; border-radius: 8px; padding: 1.2rem 1.4rem; font-family: monospace; font-size: .88rem; line-height: 1.8; }
+    .tree .dir  { color: #60a5fa; font-weight: 700; }
+    .tree .file { color: #a3e635; }
+    .tree .note { color: #6b7280; }
+    table { width: 100%; border-collapse: collapse; margin: .8rem 0; font-size: .9rem; }
+    th { background: var(--azul-oscuro); color: white; padding: .6rem .9rem; text-align: left; }
+    td { padding: .55rem .9rem; border-bottom: 1px solid var(--gris-borde); }
+    tr:nth-child(even) td { background: var(--gris-bg); }
+    .correccion { display: inline-block; background: #fef2f2; border: 1px solid #fca5a5; color: #b91c1c; font-size: .72rem; font-weight: 700; padding: 1px 8px; border-radius: 99px; text-transform: uppercase; letter-spacing: .05em; margin-left: .4rem; vertical-align: middle; }
+    ul.check { list-style: none; padding-left: 0; }
+    ul.check li { display: flex; gap: .6rem; margin-bottom: .45rem; }
+    ul.check li::before { content: "☐"; font-size: 1.1rem; flex-shrink: 0; }
+    .url { display: inline-block; background: #eff6ff; border: 1px solid #bfdbfe; color: var(--azul); padding: 2px 10px; border-radius: 6px; font-family: monospace; font-size: .88rem; word-break: break-all; }
+    footer { text-align: center; padding: 2rem; color: var(--texto-suave); font-size: .85rem; }
+  </style>
+</head>
+<body>
+<header>
+  <div class="badge">Versión Corregida · 2025</div>
+  <h1>Guía Completa<br>Herramientas Digitales PPR</h1>
+  <p>Simulador de PPR · Cotizador de Seguro · Portal de Links</p>
+  <p style="margin-top:1.2rem;opacity:.7;font-size:.85rem">Asesor Landero · Correcciones aplicadas por revisión técnica</p>
+</header>
+<nav class="toc">
+  <a href="#s01">01 Introducción</a><a href="#s02">02 Cuentas</a><a href="#s03">03 Google Sheets</a><a href="#s04">04 GitHub</a><a href="#s05">05 Archivos</a><a href="#s06">06 Claude AI</a><a href="#s07">07 Publicar</a><a href="#s08">08 Verificar</a><a href="#s09">09 Mantenimiento</a><a href="#s10">10 Instagram</a><a href="#s11">11 FAQ</a>
+</nav>
+<div class="container">
+
+<section id="s01">
+  <div class="seccion-num">Sección 01</div>
+  <h2>Introducción</h2>
+  <p>Esta guía te lleva paso a paso, desde cero, hasta tener <strong>tres herramientas digitales</strong> funcionando en internet con tu marca, tu logo y tu número de WhatsApp.</p>
+  <p>No necesitas saber programar. Solo seguir cada paso en el orden que aparece.</p>
+  <h3>Qué vas a crear</h3>
+  <ul class="lista">
+    <li><strong>Simulador de PPR</strong> (OptiMaxx Plus): tus prospectos ven cuánto tendrían acumulado al retiro.</li>
+    <li><strong>Cotizador de Seguro de Vida</strong> (OptiMaxx Protección): ven el precio por paquete según edad y suma asegurada.</li>
+    <li><strong>Portal de Links</strong>: página central con tu marca e enlace ideal para el bio de Instagram.</li>
+    <li>Las tres herramientas capturan datos del prospecto en tu Google Sheets automáticamente.</li>
+  </ul>
+  <h3>Herramientas que usarás (todas gratuitas)</h3>
+  <table><tr><th>Herramienta</th><th>Para qué sirve</th></tr>
+    <tr><td><strong>GitHub</strong></td><td>Donde vive el código de tu sitio.</td></tr>
+    <tr><td><strong>Vercel</strong></td><td>Publica tu sitio automáticamente al actualizar GitHub.</td></tr>
+    <tr><td><strong>Google Sheets + Apps Script</strong></td><td>Recibe los datos de tus prospectos.</td></tr>
+    <tr><td><strong>Claude AI</strong></td><td>Personaliza el código con tu marca, sin programar.</td></tr>
+  </table>
+  <div class="callout tip"><span>💡</span><span>Todo es completamente gratuito. No hay cargos mensuales ni pagos ocultos.</span></div>
+  <h3>Tiempo estimado</h3>
+  <p>Primera vez: <strong>2 a 3 horas</strong>. Actualizaciones posteriores: <strong>5 minutos</strong>.</p>
+  <h3>Cómo leer esta guía</h3>
+  <ul class="lista">
+    <li>Pasos numerados → acciones en orden.</li>
+    <li>💡 Amarillo → consejos útiles.</li>
+    <li>✅ Verde → confirmación de que algo funcionó.</li>
+    <li>⚠️ Naranja → advertencias importantes.</li>
+    <li>🔧 Rojo → correcciones a la guía original.</li>
+  </ul>
+</section>
+
+<section id="s02">
+  <div class="seccion-num">Sección 02</div>
+  <h2>Crear tus cuentas</h2>
+  <h3>2.1 GitHub</h3>
+  <ol class="pasos">
+    <li>Ve a <span class="url">github.com</span> y haz clic en <strong>Sign up</strong> (esquina superior derecha).</li>
+    <li>Escribe tu correo, crea una contraseña y elige un nombre de usuario (sin espacios).</li>
+    <li>Verifica tu correo con el enlace que te enviaron.</li>
+    <li>Cuando pregunten el plan, selecciona <strong>Free</strong>.</li>
+  </ol>
+  <div class="callout ok"><span>✅</span><span>Guarda tu usuario y contraseña de GitHub en un lugar seguro. Los usarás constantemente.</span></div>
+  <h3>2.2 Vercel</h3>
+  <ol class="pasos">
+    <li>Ve a <span class="url">vercel.com</span> y haz clic en <strong>Sign Up</strong>.</li>
+    <li>Selecciona <strong>Continue with GitHub</strong>. Esto conecta ambas cuentas.</li>
+    <li>Autoriza la conexión.</li>
+    <li>Cuando pregunten el tipo de proyecto, selecciona <strong>Personal → Hobby</strong> (plan gratuito).</li>
+  </ol>
+  <div class="callout tip"><span>💡</span><span>Cuando subas un archivo a GitHub, Vercel lo detecta y publica los cambios en menos de 60 segundos.</span></div>
+  <h3>2.3 Google</h3>
+  <p>Si ya tienes Gmail, ya tienes cuenta de Google. Si no: <span class="url">accounts.google.com</span></p>
+</section>
+
+<section id="s03">
+  <div class="seccion-num">Sección 03</div>
+  <h2>Configurar Google Sheets</h2>
+  <p>Crearás dos hojas: una para el PPR y otra para el Seguro. Cada una necesita un Apps Script que recibe los datos del formulario.</p>
+  <div class="callout warn"><span>⚠️</span><span>Este es el paso más técnico. Sigue los pasos exactamente. Si algo sale mal, el formulario no guardará datos pero el sitio seguirá funcionando.</span></div>
+
+  <h3>3.1 Hoja para el Simulador PPR</h3>
+  <h3 style="border-left-color:#22c55e">Crear la hoja</h3>
+  <ol class="pasos">
+    <li>Ve a <span class="url">sheets.google.com</span> y crea una hoja nueva (+).</li>
+    <li>Nómbrala: <code class="inline">Leads PPR [Tu Nombre]</code></li>
+    <li>En la fila 1 escribe estos títulos (uno por celda):
+      <table style="margin-top:.6rem"><tr><th>Celda</th><th>Título</th></tr>
+        <tr><td>A1</td><td>Fecha</td></tr><tr><td>B1</td><td>Nombre</td></tr>
+        <tr><td>C1</td><td>Edad</td></tr><tr><td>D1</td><td>WhatsApp</td></tr>
+        <tr><td>E1</td><td>Email</td></tr><tr><td>F1</td><td>Aportación mensual</td></tr>
+        <tr><td>G1</td><td>Portafolio</td></tr>
+      </table>
+    </li>
+  </ol>
+  <h3 style="border-left-color:#22c55e">Conectar Apps Script</h3>
+  <ol class="pasos">
+    <li>En Google Sheets: <strong>Extensiones → Apps Script</strong>.</li>
+    <li>Borra todo el texto que aparece en el editor.</li>
+    <li>Copia y pega exactamente este código:
+<pre>function doPost(e) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  const data = JSON.parse(e.postData.contents);
+  sheet.appendRow([
+    new Date(), data.nombre, data.edad,
+    data.whatsapp, data.email,
+    data.aportacion, data.portafolio
+  ]);
+  return ContentService
+    .createTextOutput(JSON.stringify({result:"success"}))
+    .setMimeType(ContentService.MimeType.JSON);
+}</pre>
+    </li>
+    <li>Guarda 💾 con nombre: <code class="inline">Leads PPR</code></li>
+    <li>Clic en <strong>Implementar → Nueva implementación</strong>.</li>
+    <li>Engranaje ⚙️ → selecciona <strong>Aplicación web</strong>.</li>
+    <li>Configura: Descripción = <code class="inline">v1</code> · Ejecutar como = Yo · Acceso = Cualquier persona.</li>
+    <li>Clic en <strong>Implementar</strong>.</li>
+    <li>Autoriza permisos y selecciona tu cuenta de Google.
+      <div class="callout fix" style="margin-top:.7rem"><span>🔧</span><span><strong>Corrección:</strong> Google mostrará <em>"Esta aplicación no está verificada"</em>. Es normal — eres tú autorizando tu propio código. Haz clic en <strong>Configuración avanzada</strong> → <strong>Ir a Leads PPR (no seguro)</strong> → acepta los permisos.</span></div>
+    </li>
+    <li>Copia la URL que aparece (<code class="inline">https://script.google.com/macros/s/...</code>) y <strong>guárdala en un documento aparte</strong>.</li>
+  </ol>
+  <div class="callout tip"><span>💡</span><span>Si pierdes la URL: Apps Script → Implementar → Administrar implementaciones.</span></div>
+
+  <h3>3.2 Hoja para el Cotizador de Seguro</h3>
+  <p>Mismo proceso con estos cambios:</p>
+  <p><strong>Nombre:</strong> <code class="inline">Leads Seguro Vida [Tu Nombre]</code></p>
+  <table><tr><th>Celda</th><th>Título</th></tr>
+    <tr><td>A1</td><td>Fecha</td></tr><tr><td>B1</td><td>Nombre</td></tr>
+    <tr><td>C1</td><td>Edad</td></tr><tr><td>D1</td><td>Sexo</td></tr>
+    <tr><td>E1</td><td>WhatsApp</td></tr><tr><td>F1</td><td>Email</td></tr>
+    <tr><td>G1</td><td>Suma Asegurada</td></tr><tr><td>H1</td><td>Temporalidad</td></tr>
+    <tr><td>I1</td><td>Paquete</td></tr>
+  </table>
+  <p><strong>Código del Apps Script (diferente — pega este, no el anterior):</strong></p>
+<pre>function doPost(e) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  const data = JSON.parse(e.postData.contents);
+  sheet.appendRow([
+    new Date(), data.nombre, data.edad, data.sexo,
+    data.whatsapp, data.email, data.sumaAsegurada,
+    data.temporalidad, data.paquete
+  ]);
+  return ContentService
+    .createTextOutput(JSON.stringify({result:"success"}))
+    .setMimeType(ContentService.MimeType.JSON);
+}</pre>
+  <div class="callout ok"><span>✅</span><span>Al terminar debes tener <strong>DOS URLs guardadas</strong>: una para el PPR y una para el seguro.</span></div>
+</section>
+
+<section id="s04">
+  <div class="seccion-num">Sección 04</div>
+  <h2>Crear tu repositorio en GitHub</h2>
+  <h3>4.1 Crear el repositorio</h3>
+  <ol class="pasos">
+    <li>Entra a <span class="url">github.com</span>.</li>
+    <li>En la barra lateral izquierda, bajo "Repositories", haz clic en el botón verde <strong>New</strong> (o usa el ícono <strong>+</strong> en la barra superior).
+      <div class="callout fix" style="margin-top:.5rem"><span>🔧</span><span><strong>Corrección:</strong> La guía original decía "esquina superior izquierda". El botón New está en la barra lateral izquierda bajo tu lista de repositorios.</span></div>
+    </li>
+    <li>Llena: Repository name = <code class="inline">asesor-tuapellido-web</code> (minúsculas, guiones) · Visibilidad = Public · activa <strong>Add a README file</strong>.</li>
+    <li>Clic en <strong>Create repository</strong>.</li>
+  </ol>
+  <h3>4.2 Conectar con Vercel</h3>
+  <ol class="pasos">
+    <li>Ve a <span class="url">vercel.com</span> → <strong>Add New Project</strong>.</li>
+    <li>Importa tu repositorio → <strong>Deploy</strong>.</li>
+    <li>Vercel te dará una URL: <span class="url">asesor-tuapellido-web.vercel.app</span></li>
+  </ol>
+</section>
+
+<section id="s05">
+  <div class="seccion-num">Sección 05</div>
+  <h2>Los archivos de tu sitio web</h2>
+  <h3>5.1 Dónde obtener los archivos base</h3>
+  <div class="callout fix"><span>🔧</span><span><strong>Corrección (faltaba en guía original):</strong> Los archivos genéricos están en el repositorio de GitHub compartido contigo. Descarga <code class="inline">GENERICO_ppr_index.html</code> y <code class="inline">GENERICO_seguro_index.html</code> desde ahí antes de continuar con la Sección 06.</span></div>
+  <h3>5.2 Estructura de archivos</h3>
+  <div class="tree">
+    <div><span class="dir">asesor-tuapellido-web/</span></div>
+    <div>&nbsp;├── <span class="file">index.html</span> <span class="note">→ Simulador PPR</span></div>
+    <div>&nbsp;├── <span class="file">TU_LOGO.png</span> <span class="note">→ Logo principal</span></div>
+    <div>&nbsp;├── <span class="file">TU_LOGO_PROTECCION.png</span> <span class="note">→ Logo protección</span></div>
+    <div>&nbsp;├── <span class="dir">seguro/</span></div>
+    <div>&nbsp;│&nbsp;&nbsp; └── <span class="file">index.html</span> <span class="note">→ Cotizador de Seguro</span></div>
+    <div>&nbsp;└── <span class="dir">links/</span></div>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; └── <span class="file">index.html</span> <span class="note">→ Portal de Links</span></div>
+  </div>
+  <h3>5.3 URLs resultantes</h3>
+  <table><tr><th>URL</th><th>Herramienta</th></tr>
+    <tr><td><span class="url">asesor-tuapellido-web.vercel.app</span></td><td>Simulador PPR</td></tr>
+    <tr><td><span class="url">asesor-tuapellido-web.vercel.app/seguro</span></td><td>Cotizador de Seguro</td></tr>
+    <tr><td><span class="url">asesor-tuapellido-web.vercel.app/links</span></td><td>Portal de Links</td></tr>
+  </table>
+  <h3>5.4 No modificar por tu cuenta</h3>
+  <div class="callout warn"><span>⚠️</span><span>Deja siempre a Claude: <code class="inline">simular()</code> · <code class="inline">getBono()</code> · <code class="inline">PRECIOS</code> · fórmulas de pensión mensual · <code class="inline">sendLead()</code></span></div>
+</section>
+
+<section id="s06">
+  <div class="seccion-num">Sección 06</div>
+  <h2>Personalizar con Claude AI</h2>
+  <h3>6.1 Acceder a Claude</h3>
+  <p>Ve a <span class="url">claude.ai</span>, crea una cuenta gratuita e inicia sesión.</p>
+  <h3>6.2 Darle el código a Claude</h3>
+  <ol class="pasos">
+    <li>Descarga el archivo base desde el repositorio de GitHub compartido (<code class="inline">GENERICO_ppr_index.html</code> o <code class="inline">GENERICO_seguro_index.html</code>).
+      <div class="callout fix" style="margin-top:.5rem"><span>🔧</span><span><strong>Corrección:</strong> La guía no indicaba dónde están estos archivos. Los encuentras en el repositorio de GitHub compartido: clic en el archivo → botón <strong>Download raw file</strong>.</span></div>
+    </li>
+    <li>En Claude, abre conversación nueva y escribe: <em>"Voy a compartirte el código de mi simulador de PPR para personalizarlo."</em></li>
+    <li>Adjunta el archivo con el ícono 📎.</li>
+    <li>Dile exactamente qué cambiar.</li>
+  </ol>
+  <h3>6.3 Ejemplos de peticiones a Claude</h3>
+  <ul class="lista">
+    <li>"Cambia el WhatsApp a <strong>521XXXXXXXXXX</strong> (código de país + 10 dígitos para México)."
+      <div class="callout fix" style="margin:.4rem 0 0"><span>🔧</span><span><strong>Corrección:</strong> Los enlaces <code class="inline">wa.me</code> requieren código de país. Para México: <code class="inline">521</code> + 10 dígitos. Sin código de país, el botón de WhatsApp no funcionará.</span></div>
+    </li>
+    <li>"Reemplaza la URL de Google Sheets PPR con esta: [pega tu URL]."</li>
+    <li>"Agrega mi logo. Te adjunto el PNG."</li>
+    <li>"Cambia el nombre Asesor Landero por Asesor [Tu Apellido] en todos lados."</li>
+    <li>"Cambia el color de fondo a [color o código hex]."</li>
+    <li>"Actualiza las URLs del portal de links: simulador = [URL] · seguro = [URL]."</li>
+  </ul>
+  <div class="callout tip"><span>💡</span><span>Siempre pídele al final: <em>"Dame el archivo completo actualizado."</em></span></div>
+  <h3>6.4 Obtener el archivo de Claude <span class="correccion">Corregido</span></h3>
+  <div class="callout fix"><span>🔧</span><span><strong>Corrección:</strong> La guía original decía "Claude mostrará un botón de descarga automáticamente". No siempre es así:</span></div>
+  <p style="margin-top:.8rem"><strong>Opción A — Artefacto (panel derecho):</strong> aparece ícono ↓ en la esquina superior del panel. Descarga directo.</p>
+  <p><strong>Opción B — Código en el chat:</strong> no hay botón de descarga. Haz esto:</p>
+  <ol class="pasos">
+    <li>Copia el código del bloque (botón "Copiar").</li>
+    <li>Abre Bloc de Notas (Windows) o TextEdit en modo texto plano (Mac).</li>
+    <li>Pega y guarda como <code class="inline">index.html</code> — asegúrate que la extensión sea <code class="inline">.html</code>, no <code class="inline">.txt</code>.</li>
+  </ol>
+  <h3>6.5 Tasas mensuales</h3>
+<pre>const ALLIANZ_MXN_RATE = 0.0672;  // Conservador en Pesos — 12 meses
+const ALLIANZ_USD_RATE = 0.0333;  // Conservador Dolarizado — 12 meses
+const UDIS_RATE        = 0.0847;  // AZ Revaluables — 12 meses</pre>
+  <p>Divide el porcentaje entre 100. Ejemplo: 7.15% → <code class="inline">0.0715</code></p>
+</section>
+
+<section id="s07">
+  <div class="seccion-num">Sección 07</div>
+  <h2>Subir tus archivos y publicar</h2>
+  <div class="callout tip"><span>💡</span><span>Cada vez que subas algo a GitHub, Vercel lo publica automáticamente en menos de 60 segundos.</span></div>
+  <h3>7.1 Simulador PPR (raíz del repo)</h3>
+  <ol class="pasos">
+    <li>GitHub → tu repo → <strong>Add file → Upload files</strong>.</li>
+    <li>Arrastra tu <code class="inline">index.html</code> personalizado.</li>
+    <li>Commit: <code class="inline">Agrego simulador PPR</code> → <strong>Commit changes</strong>.</li>
+    <li>Espera 30-60 s y verifica tu URL de Vercel.</li>
+  </ol>
+  <h3>7.2 Cotizador de Seguro (carpeta seguro/)</h3>
+  <ol class="pasos">
+    <li><strong>Add file → Create new file</strong>.</li>
+    <li>Nombre: <code class="inline">seguro/index.html</code> (la diagonal crea la carpeta).</li>
+    <li>Pega el contenido de tu archivo de seguro personalizado.</li>
+    <li>Commit: <code class="inline">Agrego cotizador de seguro</code>.</li>
+  </ol>
+  <h3>7.3 Portal de Links (carpeta links/)</h3>
+  <ol class="pasos">
+    <li><strong>Add file → Create new file</strong>.</li>
+    <li>Nombre: <code class="inline">links/index.html</code></li>
+    <li>Pega el contenido y commit: <code class="inline">Agrego portal de links</code>.</li>
+  </ol>
+  <h3>7.4 Logos</h3>
+  <ol class="pasos">
+    <li><strong>Add file → Upload files</strong> → arrastra los PNG.</li>
+    <li>El nombre del archivo debe coincidir exactamente con el del código.</li>
+    <li>Commit: <code class="inline">Agrego logos</code>.</li>
+  </ol>
+  <div class="callout warn"><span>⚠️</span><span>El nombre del logo es sensible a mayúsculas. <code class="inline">LOGO.png</code> ≠ <code class="inline">logo.png</code>. Deben coincidir exactamente.</span></div>
+</section>
+
+<section id="s08">
+  <div class="seccion-num">Sección 08</div>
+  <h2>Verificar que todo funciona</h2>
+  <p>Verifica desde tu celular antes de compartir los enlaces.</p>
+  <h3>8.1 Checklist Simulador PPR</h3>
+  <ul class="check">
+    <li>Sitio carga sin errores en celular.</li>
+    <li>Logo aparece en la parte superior izquierda.</li>
+    <li>Nombre y especialidad correctos en el encabezado.</li>
+    <li>Llenar el formulario completo con datos de prueba.</li>
+    <li>Seleccionar portafolio → "Ver mi proyección" → resultados correctos.</li>
+    <li>Botón WhatsApp abre conversación contigo con mensaje pre-cargado.</li>
+    <li>Google Sheet PPR registra la fila de prueba.</li>
+  </ul>
+  <h3>8.2 Checklist Cotizador de Seguro</h3>
+  <ul class="check">
+    <li>Sitio carga sin errores.</li>
+    <li>Logo de protección en el encabezado.</li>
+    <li>Llenar formulario → "Ver mi cotización" → tarjetas de paquetes con precios.</li>
+    <li>Al tocar el nombre de una cobertura se despliega la descripción.</li>
+    <li>"Me interesa este paquete" abre WhatsApp con paquete seleccionado.</li>
+    <li>Google Sheet Seguro registra la fila de prueba.</li>
+  </ul>
+  <h3>8.3 Checklist Portal de Links</h3>
+  <ul class="check">
+    <li>Sitio carga sin errores.</li>
+    <li>Logo, nombre y especialidad al centro.</li>
+    <li>Botón Simulador PPR abre la herramienta correcta.</li>
+    <li>Botón Cotizador abre la herramienta correcta.</li>
+    <li>Botón WhatsApp e Instagram funcionan correctamente.</li>
+  </ul>
+  <div class="callout ok"><span>✅</span><span>Si el logo no aparece, verifica que el nombre del PNG en GitHub coincida exactamente (mayúsculas incluidas) con el nombre en el código.</span></div>
+</section>
+
+<section id="s09">
+  <div class="seccion-num">Sección 09</div>
+  <h2>Mantenimiento mensual</h2>
+  <h3>9.1 Consultar tasas en Allianz</h3>
+  <p><span class="url">allianz.com.mx</span> → Servicios → Consultas → Rendimientos → <strong>OptiMaxx plus y educación</strong></p>
+  <ul class="lista">
+    <li><strong>Conservador en Pesos:</strong> columna "12M", Moneda Nacional.</li>
+    <li><strong>Conservador Dolarizado:</strong> columna "12M", Dólares.</li>
+    <li><strong>UDIS:</strong> sección "Revaluables" → AZ Revaluables, columna "12M".</li>
+  </ul>
+  <h3>9.2 Actualizar con Claude</h3>
+  <ol class="pasos">
+    <li>Escríbele: <em>"Actualiza las tasas: Conservador Pesos X.XX%, Dólares X.XX%, UDIS X.XX%."</em> Adjunta tu <code class="inline">index.html</code>.</li>
+    <li>Claude te devuelve el archivo actualizado.</li>
+    <li>Descárgalo y súbelo a GitHub reemplazando el anterior.</li>
+  </ol>
+  <div class="callout tip"><span>💡</span><span>Para reemplazar en GitHub: repo → clic en <code class="inline">index.html</code> → lápiz ✏️ → Ctrl+A → borrar → pegar nuevo código → Commit changes.</span></div>
+</section>
+
+<section id="s10">
+  <div class="seccion-num">Sección 10</div>
+  <h2>Usar tus herramientas en Instagram</h2>
+  <h3>10.1 BIO de Instagram</h3>
+  <p>Perfil → Editar perfil → campo "Enlace de tu bio" → escribe <span class="url">asesor-tuapellido-web.vercel.app/links</span> → Guardar.</p>
+  <h3>10.2 Historias</h3>
+  <p>Al crear una Historia → ícono enlace 🔗 → pega la URL de la herramienta → personaliza el sticker: <em>"Calcula tu retiro gratis"</em> o <em>"Cotiza tu seguro ahora"</em>.</p>
+  <h3>10.3 Destacados</h3>
+  <p>Crea un Destacado para el Simulador y otro para el Cotizador.</p>
+  <h3>10.4 Día y horario recomendado</h3>
+  <p><strong>Mejor día:</strong> martes o miércoles · <strong>Horario:</strong> 7:30 am o 7:00–9:00 pm.</p>
+</section>
+
+<section id="s11">
+  <div class="seccion-num">Sección 11</div>
+  <h2>Preguntas frecuentes</h2>
+  <h3>¿Puedo cambiar colores y diseño?</h3>
+  <p>Sí. Dile a Claude el color o compártele los códigos hex de tu paleta.</p>
+  <h3>¿Por qué el logo no aparece?</h3>
+  <p>El nombre del archivo no coincide con el del código. Verifica mayúsculas, guiones y extensión <code class="inline">.png</code>.</p>
+  <h3>¿Puedo usar dominio propio?</h3>
+  <p>Sí. Vercel → tu proyecto → Settings → Domains. Pídele ayuda a Claude con la configuración DNS.</p>
+  <h3>¿Los datos de prospectos están seguros?</h3>
+  <p>Van directo a tu Google Sheet privada. Solo tú tienes acceso. El sitio incluye Aviso de Privacidad (LFPDPPP).</p>
+  <h3>¿Puedo actualizar el contenido después?</h3>
+  <p>Sí. Claude modifica el archivo → descargas → subes a GitHub → Vercel actualiza en &lt;60 s.</p>
+  <h3>¿Qué hago si algo deja de funcionar?</h3>
+  <p>Comparte el archivo con Claude y describe el problema. La mayoría tiene causa simple (nombre de archivo, URL de Apps Script, o código funcional tocado).</p>
+  <h3>¿Puedo agregar más herramientas?</h3>
+  <p>Sí. Crear archivo → subir en carpeta nueva en GitHub → nueva URL → agregarla al portal de links.</p>
+</section>
+
+<section style="background:var(--azul-oscuro);color:white;text-align:center;padding:2rem;border-radius:12px;">
+  <p style="opacity:.7;font-size:.85rem;text-transform:uppercase;letter-spacing:.08em">Nota final</p>
+  <p style="margin-top:.5rem;font-size:1.05rem">Esta guía y sus archivos son una herramienta construida con tiempo y criterio. El resultado depende de quien la implemente.</p>
+  <p style="margin-top:.8rem;opacity:.7;font-size:.9rem">Para dudas: <strong>claude.ai</strong></p>
+</section>
+
+</div>
+<footer>
+  Guía Herramientas Digitales PPR · Asesor Landero · 2025<br>
+  <span style="font-size:.8rem;opacity:.7">Versión corregida — secciones 3.1, 3.2, 4.1, 5.1, 6.2, 6.3, 6.4</span>
+</footer>
+</body>
+</html>
