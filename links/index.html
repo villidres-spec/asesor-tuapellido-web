@@ -1,27 +1,17 @@
-<!-- ================================================================
-     PORTAL DE LINKS - ARCHIVO GENÉRICO
-     ================================================================
-     SUBE ESTE ARCHIVO en GitHub como: links/index.html
-     URL resultante: tu-repositorio.vercel.app/links
-     
-     PLACEHOLDERS A CAMBIAR:
-     - WA_NUMBER           → Tu número de WhatsApp (52 + 10 dígitos)
-     - TU_LOGO.png         → Nombre de tu archivo de logo
-     - [TU APELLIDO]       → Tu apellido
-     - [Tu Especialidad]   → Tu especialidad
-     - [Tu Ciudad]         → Tu ciudad
-     - URL_PPR             → URL completa de tu simulador PPR
-     - URL_SEGURO          → URL completa de tu cotizador de seguro
-     - tu-usuario-ig       → Tu usuario de Instagram (sin @)
-     ================================================================ -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Asesor [TU APELLIDO] — Herramientas Financieras</title>
+  <meta name="description" content="Andrés Villicaña — Asesor de seguros y planeación financiera en Frontera, Tabasco. Simulador PPR y cotizador de seguro de vida Allianz.">
+  <title>Andrés Villicaña — Herramientas Financieras</title>
+
+  <!-- Favicon inline -->
+  <link rel="icon" href="data:image/svg+xml,<svg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'><circle cx='150' cy='150' r='130' fill='%230D2147'/><circle cx='150' cy='150' r='130' fill='none' stroke='%23D4A017' stroke-width='6'/><line x1='150' y1='70' x2='90' y2='185' stroke='white' stroke-width='12' stroke-linecap='round'/><line x1='150' y1='70' x2='210' y2='185' stroke='white' stroke-width='12' stroke-linecap='round'/><line x1='116' y1='145' x2='184' y2='145' stroke='%23D4A017' stroke-width='8' stroke-linecap='round'/><line x1='118' y1='200' x2='150' y2='232' stroke='%23D4A017' stroke-width='6' stroke-linecap='round'/><line x1='182' y1='200' x2='150' y2='232' stroke='%23D4A017' stroke-width='6' stroke-linecap='round'/></svg>">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --bg:#0F153F;
@@ -62,10 +52,8 @@
       border:2px solid rgba(201,168,76,0.3);
       overflow:hidden;
     }
-    .logo-wrap img{
+    .logo-wrap svg{
       width:72px;height:72px;
-      object-fit:contain;
-      mix-blend-mode:screen;
     }
     .profile-name{font-size:22px;font-weight:800;letter-spacing:-0.3px;margin-bottom:4px;}
     .profile-name span{color:var(--gold);}
@@ -99,6 +87,7 @@
       transition:all 0.25s;
       position:relative;
       overflow:hidden;
+      cursor:pointer;
     }
     .card::before{
       content:'';
@@ -170,14 +159,33 @@
   <!-- PROFILE -->
   <div class="profile">
     <div class="logo-wrap">
-      <img src="/TU_LOGO.png" alt="Logo"> <!-- ← CAMBIA el nombre del logo -->
+      <!-- Logo AVC inline — sin dependencia de archivo externo -->
+      <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-label="Logo Andrés Villicaña">
+        <defs>
+          <linearGradient id="lblue" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#0D2147;stop-opacity:1"/>
+            <stop offset="100%" style="stop-color:#1B4F8A;stop-opacity:1"/>
+          </linearGradient>
+          <linearGradient id="lgold" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#C8992A;stop-opacity:1"/>
+            <stop offset="100%" style="stop-color:#E8B84B;stop-opacity:1"/>
+          </linearGradient>
+          <filter id="lshadow">
+            <feDropShadow dx="1" dy="2" stdDeviation="5" flood-color="#00000044"/>
+          </filter>
+        </defs>
+        <circle cx="150" cy="150" r="130" fill="url(#lblue)" filter="url(#lshadow)"/>
+        <circle cx="150" cy="150" r="130" fill="none" stroke="url(#lgold)" stroke-width="5"/>
+        <line x1="150" y1="70" x2="90" y2="185" stroke="white" stroke-width="12" stroke-linecap="round"/>
+        <line x1="150" y1="70" x2="210" y2="185" stroke="white" stroke-width="12" stroke-linecap="round"/>
+        <line x1="116" y1="145" x2="184" y2="145" stroke="#D4A017" stroke-width="8" stroke-linecap="round"/>
+        <line x1="118" y1="200" x2="150" y2="232" stroke="#D4A017" stroke-width="6" stroke-linecap="round"/>
+        <line x1="182" y1="200" x2="150" y2="232" stroke="#D4A017" stroke-width="6" stroke-linecap="round"/>
+      </svg>
     </div>
-    <div class="profile-name">Asesor <span>[TU APELLIDO]</span></div> <!-- ← CAMBIA -->
-    <div class="profile-sub">[Tu Especialidad]</div> <!-- ← CAMBIA -->
-    <div class="profile-desc">
-      Agente de seguros y asesor financiero. Especialista en protección patrimonial y planeación del retiro.
-      <!-- ← Puedes modificar esta descripción -->
-    </div>
+    <div class="profile-name">Andrés <span>Villicaña</span></div>
+    <div class="profile-sub">Asesor de Seguros &amp; Planeación Financiera</div>
+
   </div>
 
   <div class="divider"></div>
@@ -188,7 +196,7 @@
   <div class="cards">
 
     <!-- SIMULADOR PPR -->
-    <a class="card ppr" href="URL_PPR"> <!-- ← CAMBIA por tu URL completa del simulador PPR -->
+    <a class="card ppr" href="https://asesor-villicana-web.vercel.app" target="_blank" rel="noopener noreferrer">
       <div class="card-top">
         <span class="card-icon">📈</span>
         <span class="card-title">Simulador de Retiro</span>
@@ -209,7 +217,7 @@
     </a>
 
     <!-- COTIZADOR SEGURO -->
-    <a class="card seguro" href="URL_SEGURO"> <!-- ← CAMBIA por tu URL completa del cotizador -->
+    <a class="card seguro" href="https://asesor-villicana-web.vercel.app/seguro" target="_blank" rel="noopener noreferrer">
       <div class="card-top">
         <span class="card-icon">🛡️</span>
         <span class="card-title">Cotizador de Seguro de Vida</span>
@@ -237,8 +245,9 @@
   <div class="socials">
 
     <!-- WHATSAPP -->
-    <a class="social-btn" href="https://wa.me/52XXXXXXXXXX?text=Hola, me gustaría recibir información sobre tus servicios financieros." target="_blank">
-      <!-- ← CAMBIA 52XXXXXXXXXX por tu número -->
+    <a class="social-btn"
+       href="https://wa.me/5219131067938?text=Hola%20Andr%C3%A9s%2C%20me%20gustar%C3%ADa%20recibir%20informaci%C3%B3n%20sobre%20tus%20servicios%20financieros."
+       target="_blank" rel="noopener noreferrer">
       <span class="social-icon">💬</span>
       <div class="social-label">
         <div>WhatsApp</div>
@@ -247,13 +256,38 @@
       <span class="social-arrow">↗</span>
     </a>
 
+    <!-- FACEBOOK -->
+    <a class="social-btn"
+       href="https://fb.com/andres.villicanacervantes"
+       target="_blank" rel="noopener noreferrer">
+      <span class="social-icon">📘</span>
+      <div class="social-label">
+        <div>Facebook</div>
+        <div class="social-handle">andres.villicanacervantes</div>
+      </div>
+      <span class="social-arrow">↗</span>
+    </a>
+
     <!-- INSTAGRAM -->
-    <a class="social-btn" href="https://instagram.com/tu-usuario-ig" target="_blank">
-      <!-- ← CAMBIA tu-usuario-ig por tu usuario de Instagram -->
+    <a class="social-btn"
+       href="https://instagram.com/andres.villicanacervantes"
+       target="_blank" rel="noopener noreferrer">
       <span class="social-icon">📸</span>
       <div class="social-label">
         <div>Instagram</div>
-        <div class="social-handle">@tu-usuario-ig</div> <!-- ← CAMBIA -->
+        <div class="social-handle">@andres.villicanacervantes</div>
+      </div>
+      <span class="social-arrow">↗</span>
+    </a>
+
+    <!-- EMAIL -->
+    <a class="social-btn"
+       href="mailto:villidres@gmail.com"
+       target="_blank" rel="noopener noreferrer">
+      <span class="social-icon">✉️</span>
+      <div class="social-label">
+        <div>Correo electrónico</div>
+        <div class="social-handle">villidres@gmail.com</div>
       </div>
       <span class="social-arrow">↗</span>
     </a>
@@ -261,9 +295,12 @@
   </div>
 
   <div class="footer">
-    <div>© 2025 Asesor [TU APELLIDO] · [Tu Ciudad], México</div> <!-- ← CAMBIA -->
+    <div>© 2026 Andrés Villicaña · Frontera, Centla, Tabasco, México</div>
     <div style="margin-top:4px">
       Agente independiente de seguros y asesor financiero
+    </div>
+    <div style="margin-top:6px">
+      <a href="mailto:villidres@gmail.com">villidres@gmail.com</a>
     </div>
   </div>
 
